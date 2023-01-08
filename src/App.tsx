@@ -1,25 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from 'react-router-dom';
+
+import useAuth, { AuthProvider } from './context/AuthContext/AuthProvider';
+import { ToDoProvider } from './context/ToDoContext/ToDoProvider';
+import Login from './pages/Login';
+import ToDos from './pages/ToDos';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <AuthProvider>
+        <ToDoProvider>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/todos" element={<ToDos />} />
+          </Routes>
+        </ToDoProvider>
+      </AuthProvider>
+    </>
   );
 }
 
